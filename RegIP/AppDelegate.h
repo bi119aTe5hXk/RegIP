@@ -10,28 +10,33 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    IBOutlet NSTabView *tabview;
-    IBOutlet NSTextField *info;
+    NSUserDefaults *userdefaults;
+    //IBOutlet NSTabView *tabview;
+    IBOutlet NSTextView *info;
     //namecheap
-    IBOutlet NSTextField *domainname;
-    IBOutlet NSTextField *password;
-    IBOutlet NSTextField *hostname;
+    IBOutlet NSTextField *ndomainname;
+    IBOutlet NSTextField *npassword;
+    IBOutlet NSTextField *nhostname;
     IBOutlet NSButton *namecheapbtn;
+    IBOutlet NSButton *autologtonc;
     
     //oray
     IBOutlet NSTextField *ousername;
     IBOutlet NSTextField *opassword;
     IBOutlet NSTextField *ohostname;
     IBOutlet NSButton *orayloginbtn;
+    IBOutlet NSButton *autologtooray;
     
-    BOOL oremember;
-    BOOL nremember;
+    NSString *logstring;
+    BOOL namecheapautolog;
+    BOOL orayautolog;
+    
     
     
 }
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) IBOutlet NSTabView *tabview;
-@property (nonatomic, retain) IBOutlet NSTextField *info;
+@property (nonatomic, retain) IBOutlet NSTextView *info;
 
 @property (nonatomic, retain) IBOutlet NSTextField *domainname;
 @property (nonatomic, retain) IBOutlet NSTextField *password;
@@ -48,6 +53,9 @@
 
 -(IBAction)namecheaploginbtnpressed:(id)sender;
 -(IBAction)orayloginbtnpressed:(id)sender;
+-(IBAction)autologtonamecheappress:(id)sender;
+-(IBAction)autologtooraypress:(id)sender;
+-(IBAction)cleandata:(id)sender;
 -(IBAction)website:(id)sender;
 @end
 extern NSString * const KEY_OUSERPASSHOST;

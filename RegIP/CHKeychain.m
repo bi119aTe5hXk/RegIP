@@ -1,11 +1,3 @@
-//
-//  CHKeychain.m
-//  scalextreme
-//
-//  Created by Bill gates on 12-1-20.
-//  Copyright (c) 2012年 HT&L. All rights reserved.
-//
-
 #import "CHKeychain.h"
 
 
@@ -14,11 +6,11 @@
 
 + (NSMutableDictionary *)getKeychainQuery:(NSString *)service {
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-            (id)kSecClassGenericPassword, 
+            (id)kSecClassGenericPassword,
 			(id)kSecClass,
-            service, 
+            service,
 			(id)kSecAttrService,
-            service, 
+            service,
 			(id)kSecAttrAccount,
             //(id)kSecAttrAccessibleAfterFirstUnlock,
 			//(id)kSecAttrAccessible,
@@ -46,7 +38,7 @@
         } @finally {
 		}
     }
-    if (keyData) 
+    if (keyData)
 		CFRelease(keyData);
     return ret;
 }
