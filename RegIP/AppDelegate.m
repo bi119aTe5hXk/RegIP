@@ -26,6 +26,7 @@
     userdefaults = [NSUserDefaults standardUserDefaults];
     logstr = [[NSString alloc] init];
     oldIPAddr = [[NSString alloc] init];
+    ipAddr = [[NSString alloc] init];
     
     [userdefaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:nil,@"Services", nil]];
     [userdefaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"AutoUpdate", nil]];
@@ -60,6 +61,11 @@
     [self setupLeftDrawer];
     [self logWithString:@"Init compete."];
     [self refreship:nil];
+    [self manualbtnpressed:nil];
+    
+    
+    
+    
 }
 
 -(IBAction)autoUpdateSWchanged:(id)sender{
@@ -68,6 +74,7 @@
         [self.autoUpdateSwitch setState:NSOffState];
         [self.autoUpdateField setEnabled:NO];
         [userdefaults setBool:[NSNumber numberWithBool:NO] forKey:@"AutoUpdate"];
+        [self logWithString:@"Timer canceled."];
         [timer invalidate];
         timer  = nil;
     }else{
@@ -87,6 +94,7 @@
     }
 }
 -(void)setupTimer{
+    [self logWithString:@"Timer setted."];
     timer = [NSTimer scheduledTimerWithTimeInterval:autoUpdateTime*60
                                              target:self
                                            selector:@selector(timeToUpdate)
@@ -114,41 +122,22 @@
                                                            [ipaddrarr objectAtIndex:2],
                                                            [ipaddrarr objectAtIndex:3]];
         
+        [self logWithString:[NSString stringWithFormat:@"Grobal IP Address: %@",ipAddr]];
+        [self.ipAddress setStringValue:ipAddr];
         
-        if (ipAddr != oldIPAddr) {
-            oldIPAddr = ipAddr;
-            [self.ipAddress setStringValue:ipAddr];
-            [self logWithString:[NSString stringWithFormat:@"Grobal IP Address: %@",ipAddr]];
-        }else{
-            [self logWithString:[NSString stringWithFormat:@"IP Address not change: %@.",ipAddr]];
-        }
+//        if (ipAddr != oldIPAddr) {
+//            oldIPAddr = ipAddr;
+//            [self.ipAddress setStringValue:ipAddr];
+//            [self logWithString:[NSString stringWithFormat:@"Grobal IP Address: %@",ipAddr]];
+//        }else{
+//            [self logWithString:[NSString stringWithFormat:@"IP Address not change: %@.",ipAddr]];
+//        }
     }else{
         [self.ipAddress setStringValue:@"Network Error!"];
     }
 }
--(IBAction)customIP:(id)sender{
-    [NSApp beginSheet:customIPwindow
-       modalForWindow:self.window
-        modalDelegate:self
-       didEndSelector:@selector(closeAddWindow:)
-          contextInfo:NULL];
-}
--(IBAction)customIPcancel:(id)sender{
-    [self.IP_FIELD_1 setStringValue:@""];
-    [self.IP_FIELD_2 setStringValue:@""];
-    [self.IP_FIELD_3 setStringValue:@""];
-    [self.IP_FIELD_4 setStringValue:@""];
-    [customIPwindow close];
-    [NSApp endSheet:customIPwindow returnCode:NSCancelButton];
-}
--(IBAction)customIPdone:(id)sender{
-    //TO DO
-    
-    
-    [customIPwindow close];
-    [NSApp endSheet:customIPwindow returnCode:NSOKButton];
-    
-}
+
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return servicelist.count;
 }
@@ -214,8 +203,7 @@
 
 #pragma mark - Add part -
 -(IBAction)addOrayAccount:(id)sender{
-    if ([[self.ORAY_TITLE stringValue] length] != 0 &&
-        [[self.ORAY_USERNAME stringValue] length] != 0 &&
+    if ([[self.ORAY_USERNAME stringValue] length] != 0 &&
         [[self.ORAY_PASSWORD stringValue] length] != 0 &&
         [[self.ORAY_HOSTS stringValue] length] != 0) {
         [servicelist addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ORAY",@"Type",
@@ -229,8 +217,7 @@
     }
 }
 -(IBAction)addNameCheapAccount:(id)sender{
-    if ([[self.NAMECHEAP_TITLE stringValue] length] != 0 &&
-        [[self.NAMECHEAP_DOMAIN stringValue] length] != 0 &&
+    if ([[self.NAMECHEAP_DOMAIN stringValue] length] != 0 &&
         [[self.NAMECHEAP_HOSTS stringValue] length] != 0 &&
         [[self.NAMECHEAP_APIKEY stringValue] length] != 0) {
         [servicelist addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"NAMECHEAP",@"Type",
@@ -244,12 +231,11 @@
     }
 }
 -(IBAction)addCloudFlareAccount:(id)sender{
-    if ([[self.CLOUDFLARE_TITLE stringValue] length] != 0 &&
-        [[self.CLOUDFLARE_EMAIL stringValue] length] != 0 &&
+    if ([[self.CLOUDFLARE_EMAIL stringValue] length] != 0 &&
         [[self.CLOUDFLARE_DOMIAN stringValue] length] != 0 &&
         [[self.CLOUDFLARE_APIKEY stringValue] length] != 0) {
         
-        NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@CLOUDFLARE_LOAD_ALL_RECORD_URL,
+        NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:CLOUDFLARE_LOAD_ALL_RECORD_URL,
                                                     [self.CLOUDFLARE_APIKEY stringValue],
                                                     [self.CLOUDFLARE_EMAIL stringValue],
                                                     [self.CLOUDFLARE_DOMIAN stringValue]]];
@@ -271,7 +257,7 @@
                                                      action:nil
                                               keyEquivalent:@""]];
         }
-        [self.selectSubDomain setMenu:subDomainMenu];
+        [self.selectCLSubDomain setMenu:subDomainMenu];
         
         [NSApp beginSheet:addcloudflarewindow
            modalForWindow:addservicewindow
@@ -282,6 +268,78 @@
         NSRunAlertPanel(@"Error!", @"Please fill all field.",nil,nil,nil);
     }
 }
+//-(IBAction)addJiasuleAccount:(id)sender{
+//    if ([[self.JIASULE_USERNAME stringValue] length] != 0 &&
+//         [[self.JIASULE_APIKEY stringValue] length] != 0) {
+//        
+//        
+//        NSString *urlstr = [Baidu_Jiasule stringByAppendingString:[NSString stringWithFormat:@"list/"]];
+//        
+//        NSString *post_string = [NSString stringWithFormat:@"time=%f",[[NSDate date] timeIntervalSince1970]];
+//        
+//        
+//        NSMutableData *postData = [[post_string dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] mutableCopy];
+//        
+//        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+////        NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] init];;
+////        [request setURL:[NSURL URLWithString:urlstr]];
+////        [request setHTTPMethod:@"POST"];
+////        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+////        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+////        [request setHTTPBody:postData];
+//
+//        NSString *pswstr = [self hmacsha1:post_string secret:[self.JIASULE_APIKEY stringValue]];
+////        NSString* authorizationToken = [NSString stringWithFormat:@"%@:%@", [self.JIASULE_USERNAME stringValue], pswstr];
+////        [request setValue:[NSString stringWithFormat:@"Basic %@", authorizationToken] forHTTPHeaderField:@"Authorization"];
+////        NSLog(@"%@",authorizationToken);
+//        
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlstr]];
+//        [request setUsername:[self.JIASULE_USERNAME stringValue]];
+//        [request setPassword:pswstr];
+//        [request addRequestHeader:@"Content-Length" value:postLength];
+//        [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+//        [request setPostBody:postData];
+//        
+//        [request startSynchronous];
+//        
+//        NSError *error = [request error];
+//        NSData *response = [request responseData];
+//        NSLog(@"%@",[request responseString]);
+//        
+////        NSError *error;
+////        NSURLResponse *response;
+////        NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+////        NSLog(@"%@",[[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding]);
+//        NSArray* json = [NSJSONSerialization JSONObjectWithData:response
+//                                                        options:kNilOptions
+//                                                          error:&error];
+//        JSLlist  = [json valueForKey:@"ret"];
+//        NSMenu *subDomainMenu2 = [[NSMenu alloc] initWithTitle:@"Select SubDomain"];
+//        
+//        for (int i = 0; i<[JSLlist count]; i++) {
+//            [subDomainMenu2 addItem:[[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"%@ - %@ - %@",
+//                                                                      [[JSLlist objectAtIndex:i] valueForKey:@"host"],
+//                                                                      [[JSLlist objectAtIndex:i] valueForKey:@"domain"],
+//                                                                      [[[JSLlist objectAtIndex:i] valueForKey:@"ip"] objectAtIndex:0]]
+//                                                              action:nil
+//                                                       keyEquivalent:@""]];
+//        }
+//        [self.selectJSLSubDomain setMenu:subDomainMenu2];
+//        
+//        [NSApp beginSheet:addjisulewindow
+//           modalForWindow:addservicewindow
+//            modalDelegate:self
+//           didEndSelector:@selector(closeJSLAddwindow:)
+//              contextInfo:NULL];
+//        
+//        
+//    }else{
+//        NSRunAlertPanel(@"Error!", @"Please fill all field.",nil,nil,nil);
+//    }
+//}
+
+
 -(void)closeAddWindow:(id)sender{
     [self.ORAY_PASSWORD setStringValue:@""];
     [self.ORAY_HOSTS setStringValue:@""];
@@ -295,6 +353,9 @@
     [self.CLOUDFLARE_DOMIAN setStringValue:@""];
     [self.CLOUDFLARE_EMAIL setStringValue:@""];
     [self.CLOUDFLARE_TITLE setStringValue:@""];
+    [self.JIASULE_TITLE setStringValue:@""];
+    [self.JIASULE_APIKEY setStringValue:@""];
+    [self.JIASULE_USERNAME setStringValue:@""];
     
     [addservicewindow close];
     [self.tableview reloadData];
@@ -311,8 +372,8 @@
                             [self.CLOUDFLARE_DOMIAN stringValue],@"Domain",
                             [self.CLOUDFLARE_APIKEY stringValue],@"APIkey",
                             [self.CLOUDFLARE_EMAIL stringValue],@"Mail",
-                            [[CLlist objectAtIndex:[self.selectSubDomain indexOfSelectedItem]] valueForKey:@"name"],@"CLname",
-                            [[CLlist objectAtIndex:[self.selectSubDomain indexOfSelectedItem]] valueForKey:@"rec_id"],@"CLid",
+                            [[CLlist objectAtIndex:[self.selectCLSubDomain indexOfSelectedItem]] valueForKey:@"name"],@"CLname",
+                            [[CLlist objectAtIndex:[self.selectCLSubDomain indexOfSelectedItem]] valueForKey:@"rec_id"],@"CLid",
                             nil]];
     
     [self closeCLAddwindow:self];
@@ -324,19 +385,29 @@
     [self closeAddWindow:nil];
 }
 
+#pragma mark - Jiasule Account part -
+
+-(IBAction)JSLdonebtn:(id)sender{
+    
+    
+    
+    
+}
+-(void)closeJSLAddwindow:(id)sender{
+    [addjisulewindow close];
+    [addservicewindow close];
+    [NSApp endSheet:addjisulewindow returnCode:NSOKButton];
+    [self closeAddWindow:nil];
+}
+
 #pragma mark - update part -
 -(IBAction)manualbtnpressed:(id)sender{
-    oldIPAddr = ipAddr;
     [self refreship:self];
-    if (ipAddr != oldIPAddr) {
-        if (![self queue]) {
-            [self setQueue:[[NSOperationQueue alloc] init]];
-        }
-        for (int l = 0; l < [servicelist count]; l++) {
-            [self updateListAtRow:l];
-        }
-    }else{
-        [self logWithString:@"IP not change."];
+    if (![self queue]) {
+        [self setQueue:[[NSOperationQueue alloc] init]];
+    }
+    for (int l = 0; l < [servicelist count]; l++) {
+        [self updateListAtRow:l];
     }
 }
 
@@ -350,6 +421,7 @@
     [self updateListAtRow:[self.tableview selectedRow]];
 }
 -(void)timeToUpdate{
+    [self logWithString:@"It's time to Update."];
     oldIPAddr = ipAddr;
     [self refreship:self];
     if (ipAddr != oldIPAddr) {
@@ -365,23 +437,24 @@
     }
 }
 -(void)updateListAtRow:(NSInteger)row{
+    
     NSArray *arr = [servicelist objectAtIndex:row];
     if ([[arr valueForKey:@"Type"]  isEqual: @"ORAY"]) {
-        NSString *url = [NSString stringWithFormat:@ORAY_SERVER_URL,
+        NSString *url = [NSString stringWithFormat:ORAY_SERVER_URL,
                          [self encodeString:[arr valueForKey:@"Domain"] ],
                          [self encodeString:[arr valueForKey:@"APIkey"]],
                          [self encodeString:[arr valueForKey:@"Hosts"]]];
         [self startRequestWithURL:url];
         
     }else if ([[arr valueForKey:@"Type"]  isEqual: @"NAMECHEAP"]){
-        NSString *url = [NSString stringWithFormat:@NAMECHEAP_SERVER_URL,
+        NSString *url = [NSString stringWithFormat:NAMECHEAP_SERVER_URL,
                          [self encodeString:[arr valueForKey:@"Hosts"]],
                          [self encodeString:[arr valueForKey:@"Domain"]],
                          [self encodeString:[arr valueForKey:@"APIkey"]]];
         [self startRequestWithURL:url];
         
     }else if ([[arr valueForKey:@"Type"]  isEqual: @"CLOUDFLARE"]){
-        NSString *url = [NSString stringWithFormat:@CLOUDFLARE_SERVER_URL,
+        NSString *url = [NSString stringWithFormat:CLOUDFLARE_SERVER_URL,
                          [self encodeString:[arr valueForKey:@"APIkey"]],
                          [self encodeString:[arr valueForKey:@"Mail"]],
                          [self encodeString:[arr valueForKey:@"Domain"]],
@@ -417,7 +490,12 @@
 
 #pragma mark - Log part -
 -(void)logWithString:(NSString *)log{
-    logstr = [logstr stringByAppendingString:[NSString stringWithFormat:@"%@ %@\n",[NSDate date],log]];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateStyle:kCFDateFormatterFullStyle];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *fixString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    logstr = [logstr stringByAppendingString:[NSString stringWithFormat:@"%@ %@\n",fixString,log]];
     if ([logstr length] >= 5000) {
         [logstr substringFromIndex:5000];
     }
@@ -465,4 +543,24 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@MYBLOG]];
 }
 
+
+- (NSString *)hmacsha1:(NSString *)data secret:(NSString *)key {
+    
+    const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cData = [data cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+    
+    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    
+    NSData *HMACData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    
+    const unsigned char *buffer = (const unsigned char *)[HMACData bytes];
+    NSString *HMAC = [NSMutableString stringWithCapacity:HMACData.length * 2];
+    
+    for (int i = 0; i < HMACData.length; ++i)
+        HMAC = [HMAC stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
+    
+    return HMAC;
+}
 @end

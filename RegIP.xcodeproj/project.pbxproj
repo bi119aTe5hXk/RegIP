@@ -31,6 +31,8 @@
 		4732B99715FCD76400CB7C2B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4732B99615FCD76400CB7C2B /* icon.icns */; };
 		4732B99915FCD85E00CB7C2B /* README in Resources */ = {isa = PBXBuildFile; fileRef = 4732B99815FCD85E00CB7C2B /* README */; };
 		4775A904187EDAED006D7E5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732B96815FCCF7C00CB7C2B /* Foundation.framework */; };
+		47E271971901424200304DED /* icon@2x.icns in Resources */ = {isa = PBXBuildFile; fileRef = 47E271961901424200304DED /* icon@2x.icns */; };
+		47E271991901479F00304DED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47E271981901479F00304DED /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		4732B99815FCD85E00CB7C2B /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		47874A9B1882EF2400BB4DC6 /* RegIP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RegIP.entitlements; sourceTree = "<group>"; };
 		47A5D9E41877E49500424D9E /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		47E271961901424200304DED /* icon@2x.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "icon@2x.icns"; sourceTree = SOURCE_ROOT; };
+		47E271981901479F00304DED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 				4732B97515FCCF7C00CB7C2B /* AppDelegate.h */,
 				4732B97615FCCF7C00CB7C2B /* AppDelegate.m */,
 				4732B97815FCCF7C00CB7C2B /* MainMenu.xib */,
+				47E271981901479F00304DED /* Images.xcassets */,
 				4732B96A15FCCF7C00CB7C2B /* Supporting Files */,
 			);
 			path = RegIP;
@@ -186,6 +191,7 @@
 				470E68261882C70D001A0272 /* ASIHTTPRequest */,
 				4732B97215FCCF7C00CB7C2B /* Credits.rtf */,
 				4732B99615FCD76400CB7C2B /* icon.icns */,
+				47E271961901424200304DED /* icon@2x.icns */,
 				4732B96C15FCCF7C00CB7C2B /* InfoPlist.strings */,
 				4732B96F15FCCF7C00CB7C2B /* main.m */,
 				4732B96B15FCCF7C00CB7C2B /* RegIP-Info.plist */,
@@ -220,7 +226,7 @@
 		4732B95615FCCF7C00CB7C2B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "HT&L";
 				TargetAttributes = {
 					4732B95E15FCCF7C00CB7C2B = {
@@ -256,11 +262,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				470E68251882C6FE001A0272 /* S3 in Resources */,
+				47E271991901479F00304DED /* Images.xcassets in Resources */,
 				4732B96E15FCCF7C00CB7C2B /* InfoPlist.strings in Resources */,
 				4732B97415FCCF7C00CB7C2B /* Credits.rtf in Resources */,
 				4732B97A15FCCF7C00CB7C2B /* MainMenu.xib in Resources */,
 				4732B99715FCD76400CB7C2B /* icon.icns in Resources */,
 				470E68241882C6FE001A0272 /* CloudFiles in Resources */,
+				47E271971901424200304DED /* icon@2x.icns in Resources */,
 				470E68231882C6FE001A0272 /* ASIWebPageRequest in Resources */,
 				4732B99915FCD85E00CB7C2B /* README in Resources */,
 			);
@@ -319,10 +327,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -340,6 +348,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lsqlite3";
+				PROVISIONING_PROFILE = "EC561C1E-87F0-462D-B0BE-B5289D30FFA2";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -348,10 +357,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -362,6 +371,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-lsqlite3";
+				PROVISIONING_PROFILE = "EC561C1E-87F0-462D-B0BE-B5289D30FFA2";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -369,10 +379,10 @@
 		4732B97E15FCCF7C00CB7C2B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = RegIP/RegIP.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -381,7 +391,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "EC561C1E-87F0-462D-B0BE-B5289D30FFA2";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -390,10 +400,10 @@
 		4732B97F15FCCF7C00CB7C2B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = RegIP/RegIP.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -402,7 +412,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "EC561C1E-87F0-462D-B0BE-B5289D30FFA2";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};

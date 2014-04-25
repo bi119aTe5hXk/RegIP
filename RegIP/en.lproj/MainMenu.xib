@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C62" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D38" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -91,10 +91,6 @@
                 <outlet property="CLOUDFLARE_DOMIAN" destination="7xq-FA-9SJ" id="wuJ-TO-MSA"/>
                 <outlet property="CLOUDFLARE_EMAIL" destination="xeg-cV-u6H" id="kQS-Sg-NsB"/>
                 <outlet property="CLOUDFLARE_TITLE" destination="hfp-xj-Wz2" id="MIP-Bu-CVy"/>
-                <outlet property="IP_FIELD_1" destination="uop-l9-Rri" id="15n-CB-r7D"/>
-                <outlet property="IP_FIELD_2" destination="Ugz-M8-BFA" id="FRn-6i-84U"/>
-                <outlet property="IP_FIELD_3" destination="hgb-zx-APS" id="ktb-fM-Ved"/>
-                <outlet property="IP_FIELD_4" destination="snQ-de-hlf" id="1ei-gd-fSj"/>
                 <outlet property="NAMECHEAP_APIKEY" destination="wO3-Ff-JEO" id="wWy-NB-vz7"/>
                 <outlet property="NAMECHEAP_DOMAIN" destination="e4s-NQ-tlT" id="csC-2o-6lD"/>
                 <outlet property="NAMECHEAP_HOSTS" destination="GpR-31-DfK" id="Fnc-Jn-t2Q"/>
@@ -104,14 +100,15 @@
                 <outlet property="ORAY_TITLE" destination="DR1-su-hi4" id="yYB-Bc-jvW"/>
                 <outlet property="ORAY_USERNAME" destination="SHo-cF-bOA" id="Few-ZA-wLq"/>
                 <outlet property="addcloudflarewindow" destination="QgV-AR-UC1" id="T6V-GC-Yba"/>
+                <outlet property="addjisulewindow" destination="AH3-ct-9mq" id="Uak-gD-UqJ"/>
                 <outlet property="addservicewindow" destination="682-kc-fk7" id="2Xd-8H-WW0"/>
                 <outlet property="autoUpdateField" destination="IEE-Tq-7M4" id="4Xs-ba-d6v"/>
                 <outlet property="autoUpdateSwitch" destination="SmQ-be-uPk" id="C22-tv-8ad"/>
-                <outlet property="customIPwindow" destination="VLg-if-bZc" id="hv6-uv-jjj"/>
                 <outlet property="ipAddress" destination="qDI-Vd-gEl" id="C6E-PG-ndG"/>
                 <outlet property="leftDrawer" destination="lcI-ab-CQY" id="HLd-wo-GFR"/>
                 <outlet property="logtextview" destination="nLi-GQ-TdC" id="0mt-vc-1VZ"/>
-                <outlet property="selectSubDomain" destination="bTD-Hd-s4U" id="hAx-l5-31C"/>
+                <outlet property="selectCLSubDomain" destination="bTD-Hd-s4U" id="cKW-5a-Dba"/>
+                <outlet property="selectJSLSubDomain" destination="BYP-kS-JUi" id="GbP-gL-z9q"/>
                 <outlet property="showlogitem" destination="BIu-2O-KDd" id="Hew-Cq-bfQ"/>
                 <outlet property="tableview" destination="1ze-hD-zwb" id="3ZT-tq-2xt"/>
                 <outlet property="window" destination="4zt-ys-8XM" id="iGg-7z-eWI"/>
@@ -349,11 +346,9 @@
                         <rect key="frame" x="199" y="22" width="50" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="10" bezelStyle="round" id="Q9g-AH-aWP">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#" negativeFormat="#" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="0" maximumFractionDigits="0" id="RHN-zC-9Oa">
-                                <real key="roundingIncrement" value="0.0"/>
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#" negativeFormat="#" localizesFormat="NO" usesGroupingSeparator="NO" paddingCharacter="*" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" decimalSeparator="." groupingSeparator="," currencyDecimalSeparator="." plusSign="+" minusSign="-" notANumberSymbol="NaN" perMillSymbol="‰" percentSymbol="%" exponentSymbol="E" positivePrefix="" positiveSuffix="" negativePrefix="-" negativeSuffix="" id="RHN-zC-9Oa">
                                 <real key="minimum" value="1"/>
                                 <metadata>
-                                    <bool key="localizesFormat" value="NO"/>
                                     <real key="inspectorSampleValue" value="1"/>
                                 </metadata>
                             </numberFormatter>
@@ -362,17 +357,6 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button hidden="YES" verticalHuggingPriority="750" id="9Pv-NH-QBC">
-                        <rect key="frame" x="256" y="183" width="89" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Custom" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DeO-XX-Mmp">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="customIP:" target="494" id="y3F-Yh-2FG"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
         </window>
@@ -814,139 +798,49 @@ Gw
                 <outlet property="parentWindow" destination="4zt-ys-8XM" id="aT7-B4-er2"/>
             </connections>
         </drawer>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="VLg-if-bZc">
+        <window title="AJSL" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="AH3-ct-9mq">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="270" height="99"/>
+            <rect key="contentRect" x="196" y="240" width="388" height="127"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
-            <view key="contentView" id="QQ3-BE-CY2">
-                <rect key="frame" x="0.0" y="0.0" width="270" height="99"/>
+            <view key="contentView" id="fZY-Su-fBw">
+                <rect key="frame" x="0.0" y="0.0" width="388" height="127"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" id="uop-l9-Rri">
-                        <rect key="frame" x="20" y="57" width="43" height="22"/>
+                    <button verticalHuggingPriority="750" id="cvQ-eG-NSj">
+                        <rect key="frame" x="157" y="13" width="74" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Yyd-rh-PRM">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="611-9O-YAY">
-                                <real key="roundingIncrement" value="0.0"/>
-                                <real key="minimum" value="1"/>
-                                <real key="maximum" value="255"/>
-                                <metadata>
-                                    <bool key="localizesFormat" value="NO"/>
-                                    <real key="inspectorSampleValue" value="255"/>
-                                </metadata>
-                            </numberFormatter>
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" id="Ugz-M8-BFA">
-                        <rect key="frame" x="80" y="57" width="43" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="BPH-Rf-bSZ">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="zFM-4e-AL9">
-                                <real key="roundingIncrement" value="0.0"/>
-                                <real key="minimum" value="0.0"/>
-                                <real key="maximum" value="255"/>
-                                <metadata>
-                                    <bool key="localizesFormat" value="NO"/>
-                                    <real key="inspectorSampleValue" value="1"/>
-                                </metadata>
-                            </numberFormatter>
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" id="hgb-zx-APS">
-                        <rect key="frame" x="143" y="57" width="43" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4Vd-iG-1gw">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="piP-pU-voi">
-                                <real key="roundingIncrement" value="0.0"/>
-                                <real key="minimum" value="0.0"/>
-                                <real key="maximum" value="255"/>
-                                <metadata>
-                                    <bool key="localizesFormat" value="NO"/>
-                                    <real key="inspectorSampleValue" value="1"/>
-                                </metadata>
-                            </numberFormatter>
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" id="snQ-de-hlf">
-                        <rect key="frame" x="207" y="57" width="43" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="8i7-aw-klc">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="tHP-la-TVa">
-                                <real key="roundingIncrement" value="0.0"/>
-                                <real key="minimum" value="0.0"/>
-                                <real key="maximum" value="255"/>
-                                <metadata>
-                                    <bool key="localizesFormat" value="NO"/>
-                                    <real key="inspectorSampleValue" value="1"/>
-                                </metadata>
-                            </numberFormatter>
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button verticalHuggingPriority="750" id="Nyi-ZS-lJQ">
-                        <rect key="frame" x="182" y="13" width="74" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y99-Ip-Ln5">
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5sb-YT-Nsl">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="customIPdone:" target="494" id="R69-GH-EQo"/>
+                            <action selector="JSLdonebtn:" target="494" id="VoT-k5-ahT"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" id="rRL-00-TN1">
-                        <rect key="frame" x="14" y="13" width="82" height="32"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="fik-ZQ-Lbd">
+                        <rect key="frame" x="18" y="90" width="188" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vJD-jf-KVP">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please choose a sub-domain:" id="dyx-Og-0Rf">
                             <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="customIPcancel:" target="494" id="JKW-p0-vHY"/>
-                        </connections>
-                    </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HfV-RK-mMS">
-                        <rect key="frame" x="66" y="59" width="9" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="." id="0ly-p9-atX">
-                            <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="4WS-kS-tJX">
-                        <rect key="frame" x="129" y="59" width="9" height="17"/>
+                    <popUpButton verticalHuggingPriority="750" id="BYP-kS-JUi">
+                        <rect key="frame" x="18" y="58" width="353" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="." id="UcJ-xH-WpN">
-                            <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="vMv-Sr-HHY">
-                        <rect key="frame" x="192" y="59" width="9" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="." id="98S-RC-BCW">
-                            <font key="font" metaFont="systemBold"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="aFc-c4-WW4">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="UR8-tS-sDB">
+                                <items>
+                                    <menuItem title="-" id="8Np-Bm-J8X">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
                 </subviews>
             </view>
         </window>

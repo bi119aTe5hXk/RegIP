@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
+
+#include <CommonCrypto/CommonDigest.h>
+#include <CommonCrypto/CommonHMAC.h>
 @interface AppDelegate : NSObject <NSApplicationDelegate,NSTableViewDelegate,NSTableViewDataSource,ASIHTTPRequestDelegate,NSTextFieldDelegate>{
     NSUserDefaults *userdefaults;
-    
-    BOOL customIP;
     
     BOOL logviewOpen;
     BOOL autoUpdate;
@@ -22,11 +24,12 @@
     NSString *logstr;
     NSMutableArray *servicelist;
     NSArray *CLlist;
+    NSArray *JSLlist;
     NSTimer *timer;
     
     IBOutlet NSWindow *addservicewindow;
     IBOutlet NSWindow *addcloudflarewindow;
-    IBOutlet NSWindow *customIPwindow;
+    IBOutlet NSWindow *addjisulewindow;
     IBOutlet NSDrawer *leftDrawer;
     
 }
@@ -38,12 +41,10 @@
 //Main window
 @property (nonatomic, strong) IBOutlet NSTextField *ipAddress;
 @property (nonatomic, strong) IBOutlet NSTableView *tableview;
-
 @property (nonatomic, strong) IBOutlet NSButton *autoUpdateSwitch;
 @property (nonatomic, strong) IBOutlet NSTextField *autoUpdateField;
 
 @property (nonatomic, strong) IBOutlet NSTextView *logtextview;
--(IBAction)customIP:(id)sender;
 -(IBAction)refreship:(id)sender;
 -(IBAction)autoUpdateSWchanged:(id)sender;
 - (IBAction)toggleLeftDrawer:(id)sender;
@@ -53,13 +54,6 @@
 -(IBAction)updateSelect:(id)sender;
 -(IBAction)manualbtnpressed:(id)sender;
 
-//Custom IP window
-@property (nonatomic, strong) IBOutlet NSTextField *IP_FIELD_1;
-@property (nonatomic, strong) IBOutlet NSTextField *IP_FIELD_2;
-@property (nonatomic, strong) IBOutlet NSTextField *IP_FIELD_3;
-@property (nonatomic, strong) IBOutlet NSTextField *IP_FIELD_4;
--(IBAction)customIPcancel:(id)sender;
--(IBAction)customIPdone:(id)sender;
 
 //Add window
 @property (nonatomic, strong) IBOutlet NSTextField *ORAY_TITLE;
@@ -80,10 +74,20 @@
 @property (nonatomic, strong) IBOutlet NSTextField *CLOUDFLARE_EMAIL;
 -(IBAction)addCloudFlareAccount:(id)sender;
 
+@property (nonatomic, strong) IBOutlet NSTextField *JIASULE_TITLE;
+@property (nonatomic, strong) IBOutlet NSTextField *JIASULE_USERNAME;
+@property (nonatomic, strong) IBOutlet NSTextField *JIASULE_APIKEY;
+-(IBAction)addJiasuleAccount:(id)sender;
+
+
 -(IBAction)cancelbtnpressed:(id)sender;
 
 //CloudFlare window
-@property (nonatomic, strong) IBOutlet NSPopUpButton *selectSubDomain;
+@property (nonatomic, strong) IBOutlet NSPopUpButton *selectCLSubDomain;
 -(IBAction)CLdonebtn:(id)sender;
+
+//Jiasule window
+@property (nonatomic, strong) IBOutlet NSPopUpButton *selectJSLSubDomain;
+-(IBAction)JSLdonebtn:(id)sender;
 
 @end
