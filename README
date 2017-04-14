@@ -2,10 +2,12 @@ DDNS域名和IP绑定的mac客户端。
 
 简单说就是PPPOE拨号之类的动态外网IP然后又没有路由器等设备需要手动进行和域名捆绑，win下可能会有许多程序（比如花生壳的官方客户端等、还有第三方制作的一些程序不过操作及其复杂），Mac上几乎没有该类程序（Oray有linux命令行端但是安装起来较为复杂），本程序使用的是HTTP(S)进行域名的动态IP绑定。
 内置帐户记忆，不用每次启动程序都要手动输入帐户。支持间隔自动更新绑定IP。
-目前仅支持CloudFlare、Oray和NameCheap服务商，可能以后会增加更多。
+目前仅支持CloudFlare、NameCheap服务商，可能以后会增加更多。
 
-Source code of RegIP. A DDNS Client for Mac, support CloudFlare, Oray and NameCheap.
+Source code of RegIP. A DDNS Client for Mac, support CloudFlare and NameCheap.
 
 Mac AppStore：https://itunes.apple.com/us/app/regip/id865261973?mt=12
+
+更新：由于Oray更新协议暂时停止支持。本App也因需求不足暂停更新。
 
 @bi119aTe5hXk 2014.2.24

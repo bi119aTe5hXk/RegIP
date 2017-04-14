@@ -10,29 +10,29 @@
 	<string>RegIP</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CC44C503-9A58-4D5B-A58B-6A00FEEB1C90</key>
+		<key>E66645CBF2B5936B8A86E9B5E3E2EEF8E148CE0C</key>
 		<string>https://github.com/billgateshxk/RegIP.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RegIP.xcodeproj/project.xcworkspace</string>
+	<string>RegIP.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CC44C503-9A58-4D5B-A58B-6A00FEEB1C90</key>
+		<key>E66645CBF2B5936B8A86E9B5E3E2EEF8E148CE0C</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/billgateshxk/RegIP.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CC44C503-9A58-4D5B-A58B-6A00FEEB1C90</string>
+	<string>E66645CBF2B5936B8A86E9B5E3E2EEF8E148CE0C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CC44C503-9A58-4D5B-A58B-6A00FEEB1C90</string>
+			<string>E66645CBF2B5936B8A86E9B5E3E2EEF8E148CE0C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RegIP</string>
 		</dict>
